@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 //@EnableDiscoveryClient
 @EnableFeignClients
-public class ApplicationStarter80 {
+public class ConsumerApplication80 {
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationStarter80.class);
+        SpringApplication.run(ConsumerApplication80.class);
     }
 }

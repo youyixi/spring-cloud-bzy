@@ -1,12 +1,11 @@
-package com.config;
+package com.provider;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-public class ApplicationStarter7070 {
+public class ProviderApplication8001 {
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationStarter7070.class);
+        SpringApplication.run(ProviderApplication8001.class);
     }
 }

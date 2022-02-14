@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/provider")
-public class ProviceController {
+public class ProviderController {
 
     @GetMapping("get_test/{id}")
     public String getTest(@PathVariable("id") Integer id){

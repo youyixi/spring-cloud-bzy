@@ -1,11 +1,11 @@
-package com.provider;
+package com.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApplicationStarter8002 {
+public class GateWayApplication9527 {
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationStarter8002.class);
+        SpringApplication.run(GateWayApplication9527.class);
     }
 }
