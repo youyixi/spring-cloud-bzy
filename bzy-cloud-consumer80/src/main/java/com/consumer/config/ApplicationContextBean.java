@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class CommonConfig {
+public class ApplicationContextBean  {
 
     /**
      * 初始化 RestTemplate
