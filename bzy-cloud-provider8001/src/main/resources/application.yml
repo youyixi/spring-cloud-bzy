@@ -1,0 +1,67 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    #微服务名称
+    name: bzy-server
+  #数据库配置
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #mysql5.x的没有cj
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #数据库连接地址
+      url: jdbc:mysql://192.168.16.231:3306/test_bzy?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 123456
+      max-active: 100  #最大连接数
+      min-idle: 1  #最小连接数
+      initial-size: 1  #初始化时建立物理连接的个数
+      max-wait: 60000  #获取连接等待超时时间
+      time-between-eviction-runs-millis: 60000 #间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 30000 #一个连接在池中最小生存的时间，单位是毫秒
+      validation-query: select 'x'  #用来检测连接是否有效的sql 必须是一个查询语句 mysql中为 select 'x'  oracle中为 select 1 from dual
+      test-while-idle: true  #申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      test-on-borrow: false  #申请连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
+      test-on-return: false  #归还连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
+      pool-prepared-statements: true  # 是否缓存preparedStatement
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+      # druid 监控配置  访问路径：http://localhost:6211/vipDruid/login.html
+      filter:
+        stat: # 用于统计监控信息。
+          enabled: true       # 启用
+          slow-sql-millis: 1000  # 记录超过此指定时间的 慢sql 单位：ms
+          merge-sql: true     # 合并相同sql的统计
+        wall:
+          enabled: true       # 启用sql检测功能 ，防止sql注入攻击，sql防火墙启用
+        slf4j:
+          enabled: true       # 开启日志管理，监控页面可重置记录
+      web-stat-filter: # web应用 监控配置
+        enabled: true
+        profile-enable: true  # 能够监控单个url调用的sql列表
+        url-pattern: /*       # 监控路径控制  eg: /admin/*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*' # 不拦截的路径
+      stat-view-servlet: # druid 监控页面入口控制
+        enabled: true
+        allow: 127.0.0.1,192.168.16.1/27  # ip白名单 只有当前名单中的ip才能访问 1/27表示ip前27位相同即可
+        deny: 192.168.1.255                 # ip黑名单，禁止访问的地址 优先级高于白名单
+        login-username: druid             # druid 监控页面登录账号
+        login-password: 123654             # druid 监控页面登录密码
+        url-pattern: /druid/*         # 监控页面访问路径配置
+        reset-enable: true             # 是否能够重置数据
+      useGlobalDataSourceStat: true     # 合并多个DruidDataSource的监控数据
+      # 过滤器配置 可配置多个 ，使用逗号分隔 stat,wall；  不指定过滤器的参数使用默认，也可单独制定过滤器
+      # 此方法与上面的 filter 单独配置开启是一样的，只不过上面可以使用个性化配置，而filters使用默认配置，所以这两个配置可以不同时使用
+      # filters: stat,wall
+      #aop-patterns: com.xlcloud.business.vip.service.*   # Spring 监控路径
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
